@@ -1,0 +1,17 @@
+@media all and (max-width: 320px)
+{
+    div.task-panel-programm
+    {
+        padding: 0 9px;
+    }
+
+    img.programm-icon
+    {
+        width: 15px;
+    }
+
+    span.current-language, span.time, span.date
+    {
+        font-size: 0.5rem;
+    }
+}

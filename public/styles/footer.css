@@ -1,0 +1,118 @@
+footer
+{
+    background-color: rgba(0, 0, 0, 0.9);
+    height: 4vh;
+    width: 100vw;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    z-index: 1000000;
+}
+
+section.left-side-footer, section.right-side-footer
+{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 100%;
+}
+
+section.right-side-footer
+{
+    flex-flow: row-reverse nowrap;
+}
+
+div.task-panel-programm
+{
+    height: 100%;
+    padding: 0 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all .2s;
+}
+
+div.task-panel-programm:hover
+{
+    background-color: rgba(143, 143, 143, 0.4);
+    transition: all .2s;
+}
+
+img.programm-icon
+{
+    width: 20px;
+    display: block;
+}
+
+img.search
+{
+    transform: scaleX(-1);
+}
+
+div.tray-panel-empty-block
+{
+    border-left: 1px solid grey;
+    width: 8px;
+    height: 100%;
+    /* padding: 0 5px; */
+
+    margin-left: 8px;
+    transition: all .2s;
+}
+
+div.tray-panel-empty-block:hover
+{
+    background-color: rgba(143, 143, 143, 0.4);
+    transition: all .2s;
+    cursor: default;
+}
+
+div.tray-panel-programm 
+{
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 0.45em;
+    transition: all .2s;
+}
+
+div.tray-panel-programm:hover
+{
+    background-color: rgba(143, 143, 143, 0.4);
+    transition: all .2s;
+    cursor: default;
+}
+
+div.time
+{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+span.time, span.date, span.current-language
+{
+    color: #fff;
+}
+
+span.time, span.date
+{
+    font-size: 0.8rem;
+}
+
+span.current-language
+{
+    font-size: 0.8rem;
+}

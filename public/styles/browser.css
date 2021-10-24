@@ -1,0 +1,173 @@
+div.browser
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60%;
+    height: 40vh;
+    z-index: 2;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    resize: both;
+    overflow: auto;
+}
+
+div.browser, input.browser-search
+{
+    background-color: rgb(53, 53, 53);
+}
+
+div.browser-title
+{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    padding-left: 10px;
+}
+
+div.right-browser-title
+{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin: 0px 10px 10px 0px;
+}
+
+div.browser-tab
+{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    background-color: rgb(66, 66, 66);
+    height: 100%;
+    min-width: 12%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 0px 10px;
+}
+
+div.browser-tab, div.browser-navigate
+{
+    background-color: rgb(66, 66, 66);
+}
+
+p.tab-name
+{
+    text-align: left;
+    color: #fff;
+    font-size: 14px;
+}
+
+div.browser-navigate
+{
+    width: 100%;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 5px 10px;
+}
+
+div.browser-search
+{
+    flex-grow: 1;
+    position: relative;
+    border-radius: 1.2em;
+    overflow: hidden;
+}
+
+input.browser-search
+{
+    width: 100%;
+    border-radius: 1.2em;
+    position: relative;
+    font-size: 15px;
+    text-indent: 35px;
+    outline: none;
+    border: none;
+
+    padding: 5px 0px;
+    color: #fff;
+    transition: all .1s;
+    border: 2px solid transparent;
+}
+
+input.browser-search:focus
+{
+    border: 2px solid rgb(47, 0, 177);
+    cursor: text;
+}
+
+div.browser-search::before
+{
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    background-image: url('../icons/programm-icons/google.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+}
+
+div.addons
+{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-left: 10px;
+}
+
+div.addon
+{
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    margin-right: 10px;
+}
+
+div.addons div.addon:last-child
+{
+    margin-right: 0px;
+}
+
+div.main
+{
+    width: 100%;
+    height: calc(100% - 1px);
+}
+
+.browser-iframe
+{
+    height: 100%;
+    width: 100%;
+
+    outline: none;
+    border: none;
+}
+
+div.footer
+{
+    padding: 10px;
+    background-color: #000;
+}

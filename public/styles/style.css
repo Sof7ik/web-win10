@@ -1,0 +1,84 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+
+    background-repeat: no-repeat;
+
+    /* -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto; */
+
+    hyphens: manual;
+    cursor: default;
+
+    /* word-wrap: break-word; Перенос слов */
+}
+
+/* *::selection
+{
+    background-color: rgba(0, 0, 0, 0);
+} */
+
+html, body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+ul
+{
+    list-style-type: none;
+}
+
+div.left-programm-title, div.right-programm-title
+{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 0 0 10px;
+}
+
+/* progs */
+
+div.title
+{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    cursor: default;
+}
+
+div.left-programm-title
+{
+    flex-grow: 1;
+    cursor: move;
+    height: 100%;
+}
+
+span.programm-title 
+{
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+nav.notepad-nav, nav.explorer-nav
+{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(199, 199, 199, 0.63);
+    cursor: default;
+}
+
+.programm-change-size 
+{
+    padding: 4px;
+}

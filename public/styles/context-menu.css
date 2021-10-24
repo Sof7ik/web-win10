@@ -1,0 +1,159 @@
+div.context-menu
+{
+    background-color: #2b2b2b;
+    position: absolute;
+    z-index: 1000000000;
+    /* border: 1px solid #fff; */
+    min-width: 300px;
+
+    padding: 5px 0px;
+
+}
+
+ul.context-menu-item 
+{
+    border-bottom: 1px solid #fff;
+    padding: 5px 0px;
+}
+
+div.context-menu ul.context-menu-item:last-child
+{
+    border-bottom: unset;
+}
+
+ul.third
+{
+    margin-bottom: 5px;
+}
+
+ul.second li p 
+{
+    color: #616161;
+}
+
+div.context-menu p
+{
+    color: #fff;
+    transition: all .1s;
+    padding: 2px 0px 2px 25px;
+    cursor: default;
+    position: relative;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+div.context-menu p::before, div.context-menu p::after
+{
+    position: absolute;
+    display: inline-block;
+
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+}
+
+div.context-menu p:hover
+{
+    background-color: #414141;
+}
+
+p.view::after, p.sort::after, p.new::after
+{
+    content: '';
+
+    position: absolute;
+    background-image: url('../icons/context-icons/right.png');
+
+    right: 10px;
+    width: 15px;
+    height: 15px;
+}
+
+p.personalize::before
+{
+    content: '';
+    left: 0;
+    
+    background-image: url('../icons/context-icons/personalize.png');
+
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+}
+
+div.newFile {
+    position: fixed;
+    width: 275px;
+    /* height: 33px; */
+
+    background-color: #2b2b2b;
+    color: #fff;
+
+    /* top: 155px;
+    left: 303px; */
+
+    padding: 5px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+span.new-desktop-item
+{
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    font-size: 14px;
+
+    transition: all .2s;
+
+    width: 100%;
+
+    padding: 2px 0px 2px 25px;
+
+    margin-bottom: 5px;
+}
+
+div.newFile span.new-desktop-item:last-child
+{
+    margin-bottom: unset;
+}
+
+span.new-desktop-item::before
+{
+    content: '';
+    position: absolute;
+    left: 5px;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+
+    width: 18px;
+    height: 18px;
+
+    display: inline-block;
+}
+
+span.new-desktop-item:hover
+{
+    background-color: #414141;
+}
+
+span.new-desktop-item.txt::before
+{
+    background-image: url('../icons/desktop-icons/txt.png');
+}
+
+span.new-desktop-item.folder::before
+{
+    background-image: url('../icons/desktop-icons/folder.png');
+}

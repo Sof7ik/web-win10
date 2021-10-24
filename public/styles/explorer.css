@@ -1,0 +1,272 @@
+div.explorer
+{
+    width: 60%;
+    height: 50%;
+    background-color: rgb(41, 41, 41);
+
+    position: absolute;
+    top: 7%;
+    left: 14%;
+
+    transition: opacity .4s;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-self: flex-start;
+
+    resize: both;
+
+    min-height: calc(37px + 16px);
+    min-width: 400px;
+
+    overflow: hidden;
+    color: #fff;
+}
+
+img.explorer-icon
+{
+    width: 15px;
+}
+
+nav.explorer-nav
+{
+    background-color: #000;
+}
+
+a.active-explorer-navigation-item
+{
+    background-color: rgb(0, 132, 255);
+    transition: all .1s;
+}
+
+a.active-explorer-navigation-item:hover
+{
+    background-color: rgb(45, 153, 255);
+    transition: all .1s;
+}
+
+a.explorer-navigation-item
+{
+    padding: 5px 14px;
+    height: 100%;
+    display: inline-block;
+    transition: all .1s;
+}
+
+a.explorer-navigation-item:hover
+{
+    background-color: rgba(143, 143, 143, 0.4);
+    transition: all .1s;
+}
+
+.programm-change-size:hover
+{
+    background-color: rgba(143, 143, 143, 0.4);
+}
+
+.close:hover
+{
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.right-programm-title .programm-change-size:last-child
+{
+    margin-right: 0;
+}
+
+.full-window
+{
+
+}
+
+/* img.programm-change-size
+{
+    width: 20px;
+} */
+
+
+div.search
+{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 5px 7px;
+    background-color: #1f1f1f;
+}
+
+div.arrows
+{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+img.search-arrow
+{
+    width: 17px;
+    margin-right: 10px;
+    padding: 1px;
+}
+
+img.left-arrow
+{
+    transform: rotate(180deg);
+}
+
+img.up-arrow
+{
+    transform: rotate(270deg);
+    transition: all .2s;
+}
+
+img.up-arrow:hover
+{
+   background-color: rgba(143, 143, 143, 0.4);
+   transition: all .2s;
+}
+
+input.main-search-input
+{
+    flex-grow: 1;
+    margin-right: 10px;
+
+    position: relative;
+    display: block;
+}
+
+.main-search-input::after{
+    /* content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: inline-block;
+
+    background-image: url('../icons/programm-icons/redo.png');
+    background-repeat: no-repeat;
+    background-size: contain; */
+}
+
+/* .main-search-input::before{
+    background-image: url('../icons/programm-icons/redo.png');
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.main-search-input::after{
+    content: '';
+
+    width: 10px;
+    height: 10px;
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    background-image: url('../icons/programm-icons/redo.png');
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: contain;
+} */
+
+input.second-search-input
+{
+    display: inline-flex;
+    background-image: url('../icons/left-panel/search/search.png');
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+/* .second-search-input::after
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: url('../icons/left-panel/search/search.png');
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+} */
+
+input.main-search-input, input.second-search-input
+{
+    background-color: #1f1f1f;
+    outline: none;
+    border: 1px solid grey;
+    color: #fff;
+    padding: 2px 0px;
+    text-indent: 5px;
+}
+
+div.main-content
+{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: hidden;
+    height: calc(100% - 1px);
+}
+
+aside.left-list
+{
+    overflow: auto;
+    padding: 15px 0px 0px 15px;
+    color: #fff;
+
+    /* border: 1px solid violet; */
+
+    max-height: 100%;
+    max-width: 230px;
+    min-width: 200px;
+    flex-shrink: 1;
+    height: 100%;
+
+    background-color: #1f1f1f;
+    resize: horizontal;
+}
+
+ul.inner-ul
+{
+    margin-left: 8px;
+}
+
+section.explorer-content-wrapper
+{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 10px;
+
+    /* border: 1px solid red; */
+
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+
+    background-color: #272727;
+
+    border-left: 2px solid #323232;
+}
+
+div.explorer-footer
+{
+    padding: 5px 7px;
+    background-color: #333333;
+}
+
+p.explorer-footer-element-count
+{
+    color: #fff;
+    font-size: 13px;
+}

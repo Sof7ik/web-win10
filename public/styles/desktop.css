@@ -1,0 +1,79 @@
+main
+{
+    width: 100vw;
+    height: 96vh;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    padding: 3px;
+
+    transition: all .4s;
+}
+
+div.desktop-wrapper
+{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+div.desktop-item
+{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 80px;
+    min-width: 80px;
+
+    padding: 4px;
+
+    cursor: default;
+    transition: all .4s;
+}
+
+/* div.shortcut-wrapper::before
+{
+    content: '—';
+    position: relative;
+    bottom: 0;
+    right: 0;
+    background-color: greenyellow;
+} */
+
+div.active 
+{
+    outline: 1px solid grey;
+    background-color: rgba(87, 87, 87, 0.603);
+    transition: all .4s;
+}
+
+div.desktop-item:hover, div.active {
+    outline: 1px solid grey;
+    background-color: rgba(87, 87, 87, 0.603);
+    transition: all .4s;
+}
+
+img.folder, img.txt, img.shortcut, img.bin, img.settings
+{
+    width: 50px;
+    height: 50px;
+    display: block;
+}
+
+span.file-name
+{
+    font-size: 13px;
+    text-align: center;
+    color: #fff;
+}
+
+img.folder::selection, img.txt::selection, img.shortcut::selection, img.bin::selection, span.file-name::selection
+{
+    background-color: rgba(0, 0, 0, 0);
+}
