@@ -118,11 +118,6 @@ ul.lists-wrapper > li > ul > li > span.active_nav_item
     margin-right: 0;
 }
 
-img.programm-change-size
-{
-    width: 20px;
-}
-
 div.notepad-text
 {
     height: calc(100% - 1px);

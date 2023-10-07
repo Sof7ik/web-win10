@@ -8,6 +8,13 @@ import {
 import { swapExplorerArrows } from './explorer';
 import { URLHandler } from './browser';
 
+import closeIcon from "../assets/icons/programm-icons/close.svg";
+import minifyIcon from "../assets/icons/programm-icons/minify.svg";
+import fullWindow from "../assets/icons/programm-icons/full-widnow.svg";
+import folderIcon from "../assets/icons/desktop-icons/folder.png";
+import txtIcon from "../assets/icons/desktop-icons/txt.png";
+import settingsIcon from "../assets/icons/desktop-icons/settings.png";
+
 export class DesktopItem
 {
     constructor(id)
@@ -24,23 +31,24 @@ export class DesktopItem
 
         this.txt = document.createElement('span');
         this.txt.classList.add('file-name');
-        this.txt.innerText = text
+        this.txt.innerText = text;
 
         this.el.insertAdjacentElement('beforeend', this.img);
         this.el.insertAdjacentElement('beforeend', this.txt);
-        
-        if (what == 'folder')
-        {
-            this.el.classList.add('folder');
-            this.img.setAttribute('src', '../icons/desktop-icons/folder.png');
-            this.img.classList.add('folder');
-            
-            
-        } else if (what == 'txt') {
-            this.el.classList.add('txt');
-            this.img.setAttribute('src', '../icons/desktop-icons/txt.png');
-            this.img.classList.add('txt');
+
+        switch (what) {
+            case "folder":
+                this.img.src = folderIcon;
+                break;
+            case "txt":
+                this.img.src = txtIcon;
+                break;
+            default:
+                break;
         }
+
+        this.el.classList.add(what);
+        this.img.classList.add(what);
 
         document.querySelector('.desktop-wrapper').insertAdjacentElement('beforeend', this.el);
     }
@@ -51,11 +59,41 @@ export class Program
     //what MUST BE like "explorer", "notepad", "browser", "settings" so like classes in CSS
     constructor(what)
     {
-        this.Zindex = 2;
+        this.activeClassName = "active-program";
+
+        this.zIndex = 2;
         this.element = document.createElement('div');
-        this.element.classList.add(what, 'activeProg');
+        this.element.classList.add(what, this.activeClassName, "application");
         this.element.style.zIndex = this.zIndex;
         this.zIndex++;
+
+        this.taskPanelShortcut = null;
+
+        this.closeProgram = this.closeProgram.bind(this);
+        this.minifyWindow = this.minifyWindow.bind(this);
+        this.fullWindow = this.fullWindow.bind(this);
+    }
+
+    renderButtonsPanel() {
+        return `
+            <button class="programm-change-size semi-close">
+                <img class="programm-change-size__icon"
+                    src="${minifyIcon}" 
+                    alt="minify-window">
+            </button>
+    
+            <button class="programm-change-size full-window">
+                <img class="programm-change-size__icon full-window" 
+                    src="${fullWindow}" 
+                    alt="full-window">
+            </button>
+            
+            <button class="programm-change-size close">
+                <img class="programm-change-size__icon"
+                    src="${closeIcon}" 
+                    alt="close">
+            </button>
+        `;
     }
 
     //создаем передвижение программ
@@ -118,10 +156,7 @@ export class Program
                 </div>
 
                 <div class="right-programm-title">
-                    <span class="programm-change-size semi-close" style="color: #000;">—</span>
-                    <img class="programm-change-size full-window" src="./icons/programm-icons/full-window.png" alt="full-window" style="color: transparent;">
-                    <!-- <img class="programm-change-size close" src="./icons/programm-icons/close.png" alt="close"> -->
-                    <span class="programm-change-size close" style="color: #000;">×</span>
+                   ${this.renderButtonsPanel()}
                 </div>
             </div>
             
@@ -174,10 +209,7 @@ export class Program
                 </div>
                     
                 <div class="right-programm-title right-explorer-title">
-                    <span class="programm-change-size semi-close">—</span>
-                    <img class="programm-change-size full-window" src="./icons/programm-icons/full-window.png" alt="full-window">
-                    <!-- <img class="programm-change-size close" src="./icons/programm-icons/close.png" alt="close"> -->
-                    <span class="programm-change-size close">×</span>
+                    ${this.renderButtonsPanel()}
                 </div>
             </div>
             <nav class="explorer-nav">
@@ -258,10 +290,7 @@ export class Program
                 </div>
                     
                 <div class="right-programm-title right-browser-title">
-                    <span class="programm-change-size semi-close">—</span>
-                    <img class="programm-change-size full-window" src="./icons/programm-icons/full-window.png" alt="full-window">
-                    <!-- <img class="programm-change-size close" src="./icons/programm-icons/close.png" alt="close"> -->
-                    <span class="programm-change-size close">×</span>
+                    ${this.renderButtonsPanel()}
                 </div>
             </div>
             <div class="browser-navigate">
@@ -303,26 +332,25 @@ export class Program
         this.element.style.width = '100vw';
         this.element.insertAdjacentHTML('afterbegin',
         `
-        <aside class="left">
+            <aside class="left">
                 <div class="left-title">
                     <div class="left-programm-title">
                         <span class="settings-title">Parametrs</span>
                     </div>
                 </div>
-
+    
                 <div class="first-setting-div">
-
                     <div class="setting-item" style="margin-bottom: 10px;">
                         <p class="setting-item home">Home</p>
                     </div>
-
+    
                     <form class="setting-search">
                         <input type="text" placeholder="Search for parametr" class="search-input-text">
                         <input type="submit" class="search-btn" value="">
                     </form>
                     
                     <p class="parametr-name">Personalize</p>
-
+    
                 </div>
                 
                 <ul class="all-settings">
@@ -331,25 +359,25 @@ export class Program
                             <p class="setting-item desktop-bg">Desktop background</<p>
                         </div>
                     </li>
-
+    
                     <li>
                         <div class="setting-item">
                             <p class="setting-item desktop-bg">Colors</<p>
                         </div>
                     </li>
-
+    
                     <li>
                         <div class="setting-item">
                             <p class="setting-item desktop-bg">Login screen</<p>
                         </div>
                     </li>
-
+    
                     <li>
                         <div class="setting-item">
                             <p class="setting-item desktop-bg">Themes</<p>
                         </div>
                     </li>
-
+    
                     <li>
                         <div class="setting-item">
                             <p class="setting-item desktop-bg">Fonts</p>
@@ -357,19 +385,18 @@ export class Program
                     </li>
                 </ul> 
             </aside>
-
+    
             <aside class="right">
                 <div class="right-programm-title right-settings-title"> 
-                    <span class="programm-change-size semi-close">—</span>
-                    <img class="programm-change-size full-window" src="./icons/programm-icons/full-window.png" alt="full-window">
-                    <!-- <img class="programm-change-size close" src="./icons/programm-icons/close.png" alt="close"> -->
-                    <span class="programm-change-size close">×</span>
+                    ${this.renderButtonsPanel()}
                 </div>
-
+    
                 <h1 class="right-aside-title">Desktop background</h1>
-
-                <img class="desktop-bg-example" src="./settings/desktop-bg-example-1.png" alt="">
-
+    
+                <img class="desktop-bg-example" 
+                    src="/assets/desktop-bg/IMG_7484.JPG" 
+                    alt="">
+    
                 <h3>Background</h3>
                 <select id="select-bg-type">
                     <option></option>
@@ -377,17 +404,17 @@ export class Program
                     <option>Color</option>
                     <option>Slides</option>
                 </select>
-
+    
                 <div class="choosen">
                     <form enctype="multipart/form-data" action="./php/files.php" method="POST">
                         <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
                         <input type="file" id="select-desktop-image" name="bgImage">
                         <label class="select-desktop-image-label" for="select-desktop-image">Обзор</label>
-
+    
                         <input type="submit">
                     </form>
                 </div>
-
+    
                 <h3 class="choose-pos">Choose position</h3>
                 <select id="select-contain-type">
                     <option data-position="contain">Contain</option>
@@ -395,9 +422,8 @@ export class Program
                     <option data-position="100%">100%</option>
                     <option  data-position="background-repeat">background-repeat</option>
                 </select>
-                
             </aside>
-        `)
+        `);
         this.giveAllFuncs(what);
         ChangeDesktopBgType();
         SelectNewColor();
@@ -405,39 +431,63 @@ export class Program
             event.preventDefault();
             console.log('Searching...');
         })
+
+        // создание элемента для панели задач
+        this.taskPanelShortcut = new TaskPanelElement(settingsIcon, this);
+        // добавляем элемент на панель задач
+        this.taskPanelShortcut.addToPanel();
     }
 
     //закрытие программы
-    closeProgramm (event) 
+    closeProgram (event)
     {
-        event.target.parentElement.parentElement.parentElement.remove();
+        // удаляем из HTML окно программы
+        event.target.closest(`.${this.activeClassName}`).remove();
+
+        // удаляем из панели задач HTML ярлыка
+        this.taskPanelShortcut.removeFromPanel();
     }
 
     //развёртывание на полный экран
     fullWindow (event) 
     {
-        let parentElement = event.target.parentElement.parentElement.parentElement;
-        if (parentElement.style.height == '100vh' && parentElement.style.width == '100vw')
+        let parentElement = event.target.closest(`.${this.activeClassName}`);
+
+        console.log(parentElement);
+
+        // сворачиваем приложение
+        if (parentElement.style.height === '100vh' && parentElement.style.width === '100vw')
         {
             console.log("parentElement.style.height == '100vh' && parentElement.style.width == '100vw'");
             parentElement.style.top = '7%';
             parentElement.style.left = '14%';
             parentElement.style.height = '50%';
             parentElement.style.width = '60%';
-        } else {
+        }
+        // разворачиваем приложение
+        else {
             console.log("parentElement.style.height !== '100vh' && parentElement.style.width !== '100vw'");
             parentElement.style.top = '0px';
             parentElement.style.left = '0px';
             parentElement.style.height = '100vh';
             parentElement.style.width = '100vw';
         }
+
+        // делаем активным на панели задач
+        this.taskPanelShortcut.toggleState();
     }
 
     //сворачивание окна
-    semiCloseWindow (event)
+    minifyWindow (event)
     {
-        let parentElement = event.target.parentElement.parentElement.parentElement;
-        parentElement.style.opacity = 0.3;
+        this.element.classList.add("minified");
+
+        // убираем активность с элемента на панели задач
+        this.taskPanelShortcut.toggleState();
+    }
+
+    maximizeWindow() {
+        this.element.classList.remove("minified");
     }
     
     giveAllFuncs(what)
@@ -446,9 +496,44 @@ export class Program
         mainElement.insertAdjacentElement('afterbegin', this.element);
         this.dragElement(document.querySelector(`div.${what}`));
         clearActiveElements();
-        document.querySelector('span.close').addEventListener('click', this.closeProgramm);
-        document.querySelector('img.full-window').addEventListener('click', this.fullWindow);
-        document.querySelector('span.semi-close').addEventListener('click', this.semiCloseWindow);
+        this.element.querySelector(".close").addEventListener('click', this.closeProgram);
+        this.element.querySelector('.full-window').addEventListener('click', this.fullWindow);
+        this.element.querySelector('.semi-close').addEventListener('click', this.minifyWindow);
+    }
+}
+
+export class TaskPanelElement {
+    constructor(pathToIcon, linkedApp) {
+        this.taskProgram = document.createElement("div");
+        this.taskProgram.classList.add("task-panel-programm", "opened", "active");
+
+        // create icon
+        const icon = document.createElement("img");
+        icon.classList.add("programm-icon");
+        icon.src = pathToIcon;
+
+        this.taskProgram.appendChild(icon);
+
+        // привязываем экземпляр приложения к ярылку на панели задач
+        this.linkedApp = linkedApp;
+
+        this.taskProgram.addEventListener("click", e => this.maximizeApp());
+    }
+
+    addToPanel() {
+        document.querySelector(".left-side-footer").appendChild(this.taskProgram);
+    }
+
+    removeFromPanel() {
+        this.taskProgram.remove();
+    }
+
+    toggleState() {
+        this.taskProgram.classList.toggle("active");
+    }
+
+    maximizeApp(clickEvent) {
+        this.linkedApp.maximizeWindow();
     }
 }
 

@@ -37,13 +37,34 @@ div.task-panel-programm
     align-items: center;
     justify-content: center;
 
-    transition: all .2s;
+    position: relative;
+
+    transition: background-color .2s;
 }
 
 div.task-panel-programm:hover
 {
-    background-color: rgba(143, 143, 143, 0.4);
-    transition: all .2s;
+    background-color: var(--task-panel-item-hover-color);
+}
+
+.task-panel-programm.active {
+    background-color: var(--task-panel-item-hover-color);
+}
+.task-panel-programm::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background-color: var(--win-blue-color);
+
+    opacity: 0;
+
+    transition: opacity .3s;
+}
+.task-panel-programm.opened::after {
+    opacity: 1;
 }
 
 img.programm-icon

@@ -10,7 +10,7 @@ div.container
 
     box-shadow: inset 0px 0px 2000px 100px #000;
 
-    background-image: url('../desktop-bg/ken_roczen_suzuki_2015.jpg');
+    background-image: url('../../assets/desktop-bg/ken_roczen_suzuki_2015.jpg');
 
     background-repeat: no-repeat;
     background-position: center center;
@@ -158,7 +158,7 @@ input[type="password"]:focus{
 
 input[type="submit"]#login-btn
 {
-    background-image: url('../icons/programm-icons/to-arrow white.png');
+    background-image: url('../../assets/icons/programm-icons/to-arrow white.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;

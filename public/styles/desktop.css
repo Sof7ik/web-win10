@@ -1,8 +1,5 @@
 main
 {
-    width: 100vw;
-    height: 96vh;
-
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -10,10 +7,12 @@ main
     display: flex;
     padding: 3px;
 
-    transition: all .4s;
+    flex-grow: 1;
+
+    transition: background .4s;
 }
 
-div.desktop-wrapper
+.desktop-wrapper
 {
     display: flex;
     flex-flow: column wrap;
@@ -21,7 +20,7 @@ div.desktop-wrapper
     justify-content: flex-start;
 }
 
-div.desktop-item
+.desktop-item
 {
     display: flex;
     flex-flow: column nowrap;
@@ -46,34 +45,44 @@ div.desktop-item
     background-color: greenyellow;
 } */
 
-div.active 
+.desktop-item.active
 {
     outline: 1px solid grey;
     background-color: rgba(87, 87, 87, 0.603);
     transition: all .4s;
 }
 
-div.desktop-item:hover, div.active {
+.desktop-item:hover, .desktop-item.active {
     outline: 1px solid grey;
     background-color: rgba(87, 87, 87, 0.603);
     transition: all .4s;
 }
 
-img.folder, img.txt, img.shortcut, img.bin, img.settings
+/* Иконки */
+.desktop-item .folder,
+.desktop-item .txt,
+.desktop-item .shortcut,
+.desktop-item .bin,
+.desktop-item .settings
 {
     width: 50px;
     height: 50px;
     display: block;
 }
 
-span.file-name
+.desktop-item .folder::selection,
+.desktop-item .txt::selection,
+.desktop-item .shortcut::selection,
+.desktop-item .bin::selection,
+.desktop-item .file-name::selection
+{
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* название файла */
+.file-name
 {
     font-size: 13px;
     text-align: center;
     color: #fff;
-}
-
-img.folder::selection, img.txt::selection, img.shortcut::selection, img.bin::selection, span.file-name::selection
-{
-    background-color: rgba(0, 0, 0, 0);
 }

@@ -1,6 +1,7 @@
 const mainElement = document.querySelector('main');
 
 import {clearActiveElements, makeFileActive, renderFiles, getUserInfo} from './desktop';
+import {Program} from "./Classes";
 
 //скрытие контекстного меню
 export const deleteContextMenus = () =>
@@ -105,8 +106,8 @@ export const makeDesktopContextMenu = (event) =>
     //чтобы на файлы тыкая не появлялась контекстая менюшка раюочего стола
     if (
         event.target.classList.contains('desktop-item') ||
-        event.target.tagName == 'IMG' ||
-        event.target.tagName == 'SPAN'
+        event.target.tagName === 'IMG' ||
+        event.target.tagName === 'SPAN'
     ) {
         return;
     }

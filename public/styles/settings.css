@@ -52,7 +52,7 @@ div.left-title span.settings-title::before
     transform: rotate(180deg);
     width: 20px;
     top: 0;
-    background-image: url('../icons/programm-icons/to-arrow.png');
+    background-image: url('../../assets/icons/programm-icons/to-arrow.png');
 }
 
 div.first-setting-div
@@ -135,7 +135,7 @@ form.setting-search:hover
 
 input.search-btn
 {
-    background-image: url('../icons/left-panel/search/search.png');
+    background-image: url('../../assets/icons/left-panel/search/search.png');
     background-repeat: no-repeat;
     background-size: 70%;
     background-position: center center;
@@ -197,12 +197,12 @@ span.settings-title::before
     height: 100%;
 }
 
-p.home::before{background-image: url('../icons/programm-icons/settings-icons/home-settings.png');}
-p.desktop-bg::before{background-image: url('../icons/programm-icons/settings-icons/desktop-bg.png');}
-p.colors::before{background-image: url('../icons/programm-icons/settings-icons/colors.png');}
-p.login-screen::before{background-image: url('../icons/programm-icons/settings-icons/desktop-bg.png');}
-p.themes::before{background-image: url('../icons/programm-icons/settings-icons/desktop-bg.png');}
-p.fonts::before{background-image: url('../icons/programm-icons/settings-icons/desktop-bg.png');}
+p.home::before{background-image: url('../../assets/icons/programm-icons/settings-icons/home-settings.png');}
+p.desktop-bg::before{background-image: url('../../assets/icons/programm-icons/settings-icons/desktop-bg.png');}
+p.colors::before{background-image: url('../../assets/icons/programm-icons/settings-icons/colors.png');}
+p.login-screen::before{background-image: url('../../assets/icons/programm-icons/settings-icons/desktop-bg.png');}
+p.themes::before{background-image: url('../../assets/icons/programm-icons/settings-icons/desktop-bg.png');}
+p.fonts::before{background-image: url('../../assets/icons/programm-icons/settings-icons/desktop-bg.png');}
 
 aside.right
 {
@@ -240,10 +240,11 @@ aside.right .right-settings-title
     position: fixed;
 }
 
-img.desktop-bg-example
+.desktop-bg-example
 {
     margin-top: 25px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 600px;
 }
 
 h3

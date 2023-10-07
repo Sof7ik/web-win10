@@ -1,0 +1,24 @@
+.application {
+    transition: opacity .5s;
+    pointer-events: all;
+}
+
+.application.minified {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* <button> */
+.programm-change-size {
+    padding: 9px 17px;
+
+    background-color: transparent;
+    display: block;
+    outline: none;
+    border: none;
+}
+
+/* <img> */
+.programm-change-size__icon {
+    width: 10px;
+}
