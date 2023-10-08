@@ -1,8 +1,8 @@
-div.settings
+.settings
 {
     position: absolute;
-    top: 0%;
-    left: 0%;
+    top: 0;
+    left: 0;
 
     resize: both;
     overflow: auto;
@@ -18,7 +18,7 @@ div.settings
     color: #fff;
 }
 
-aside.left
+.left
 {
     background-image: linear-gradient(to right, rgba(17, 17, 17, 0.8), rgba(7, 7, 7, 0.8));
     height: 100%;
@@ -28,26 +28,26 @@ aside.left
     backdrop-filter: blur(10px);
 }
 
-div.left-title
+.left-title
 {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-starts;
+    justify-content: flex-start;
     align-items: center;
 }
 
-div.left-title img
+.left-title img
 {
     width: 20px;
 }
 
-span.settings-title
+.settings-title
 {
     position: relative;
     padding: 10px 0px 10px 40px;
 }
 
-div.left-title span.settings-title::before
+.left-title span.settings-title::before
 {
     transform: rotate(180deg);
     width: 20px;
@@ -55,28 +55,28 @@ div.left-title span.settings-title::before
     background-image: url('../../assets/icons/programm-icons/to-arrow.png');
 }
 
-div.first-setting-div
+.first-setting-div
 {
     margin-top: 20px;
 }
 
-div.setting-item
+.setting-item
 {
-    padding: 15px 0px;
+    padding: 15px 0;
     transition: all .3s;
 }
 
-div.setting-item:hover
+.setting-item:hover
 {
     background-color: #484848;
 }
 
-div.setting-item img
+.setting-item img
 {
     width: 13px;
 }
 
-p.setting-item
+.setting-item
 {
     font-size: 15px;
     position: relative;
@@ -84,7 +84,7 @@ p.setting-item
     cursor: default;
 }
 
-p.parametr-name
+.parameter-name
 {
     margin-bottom: 40px;
     font-size: 17px;
@@ -100,9 +100,8 @@ div.setting-item p.setting-item
 form.setting-search
 {
     border: 2px solid #717171;
-    margin-bottom: 25px;
     position: relative;
-    margin: 0px 20px 25px 10px; 
+    margin: 0 20px 25px 10px;
 
     display: flex;
     flex-flow: row nowrap;

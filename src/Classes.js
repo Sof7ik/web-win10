@@ -349,7 +349,7 @@ export class Program
                         <input type="submit" class="search-btn" value="">
                     </form>
                     
-                    <p class="parametr-name">Personalize</p>
+                    <p class="parameter-name">Personalize</p>
     
                 </div>
                 
