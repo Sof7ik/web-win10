@@ -1,4 +1,5 @@
 node_modules
 .idea
 .vscode
-db
+/server/vendor/
+/server/configs/
