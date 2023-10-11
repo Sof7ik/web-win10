@@ -1,4 +1,4 @@
-.settings
+.application.settings
 {
     position: absolute;
     top: 0;
@@ -18,7 +18,7 @@
     color: #fff;
 }
 
-.left
+.application.settings .left
 {
     background-image: linear-gradient(to right, rgba(17, 17, 17, 0.8), rgba(7, 7, 7, 0.8));
     height: 100%;
@@ -28,7 +28,7 @@
     backdrop-filter: blur(10px);
 }
 
-.left-title
+.application.settings .left-title
 {
     display: flex;
     flex-flow: row nowrap;
@@ -36,18 +36,18 @@
     align-items: center;
 }
 
-.left-title img
+.application.settings .left-title img
 {
     width: 20px;
 }
 
-.settings-title
+.application.settings .settings-title
 {
     position: relative;
-    padding: 10px 0px 10px 40px;
+    padding: 10px 0 10px 40px;
 }
 
-.left-title span.settings-title::before
+.application.settings .left-title .settings-title::before
 {
     transform: rotate(180deg);
     width: 20px;
@@ -55,28 +55,28 @@
     background-image: url('../../assets/icons/programm-icons/to-arrow.png');
 }
 
-.first-setting-div
+.application.settings .first-setting-div
 {
     margin-top: 20px;
 }
 
-.setting-item
+.application.settings .setting-item
 {
     padding: 15px 0;
     transition: all .3s;
 }
 
-.setting-item:hover
+.application.settings .setting-item:hover
 {
     background-color: #484848;
 }
 
-.setting-item img
+.application.settings .setting-item img
 {
     width: 13px;
 }
 
-.setting-item
+.application.settings .setting-item
 {
     font-size: 15px;
     position: relative;
@@ -84,7 +84,7 @@
     cursor: default;
 }
 
-.parameter-name
+.application.settings .parameter-name
 {
     margin-bottom: 40px;
     font-size: 17px;
@@ -140,7 +140,7 @@ input.search-btn
     background-position: center center;
     transform: scaleX(-1);
 
-    height: 100%;
+    /*height: 100%;*/
     outline: none;
     width: 32px;
     height: 32px;
