@@ -1,10 +1,14 @@
+import winLogoBlue from "/assets/icons/left-panel/win/win-blue.png";
+import winLogoWhite from "/assets/icons/left-panel/win/win-white.png";
+
+
 //подмена картинок "Пуск"
 export const swapWinLogo = () => {
     document.querySelector('div.task-panel-programm').addEventListener('mouseover', (event) => {
-        document.querySelector('img.win').setAttribute('src', './icons/left-panel/win/win-blue.png');
+        document.querySelector('img.win').src = winLogoBlue;
     })
     document.querySelector('div.task-panel-programm').addEventListener('mouseout', (event) => {
-        document.querySelector('img.win').setAttribute('src', './icons/left-panel/win/win-white.png');
+        document.querySelector('img.win').src = winLogoWhite;
     })
 }
 
