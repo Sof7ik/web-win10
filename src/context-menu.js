@@ -210,7 +210,7 @@ export const makeDesktopContextMenu = (event) =>
 
         generateNewFile();
 
-        if (bool == false)
+        if (bool === false)
         {
             document.querySelector('p.new').addEventListener('mouseleave', () => {  //выход мыши с "New"
                 document.querySelector('.context-menu').addEventListener('mouseover', contextMenu) //добавляем событие наведения на контекстное меню

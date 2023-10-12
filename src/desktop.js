@@ -1,10 +1,7 @@
-import {f} from "caniuse-lite/data/browserVersions";
-
-let fileId;
-let userId = null;
-
-import { deleteContextMenus, makeDesktopContextMenu, makeFileContextMenu } from './context-menu';
+import { deleteContextMenus } from './context-menu';
 import { Program, DesktopItem } from './Classes';
+
+let fileId, userId;
 
 export function getUserInfo (url) {
     // console.log(url);
@@ -163,16 +160,6 @@ export const checkFileTypeOnDBLClick = async (event) => {
     {
         new Program('settings').openSettings('settings');
     }
-
-    // getFilesFromDB()
-    // .then(res => {
-    //     return res.json();
-    // })
-    // .then(filesFromDatabase => {
-    //     let target = event.target.parentElement;
-    //     let fileName = target.lastElementChild.textContent;
-    //
-    // })
 }
 
 // получаем ID пользователя из localStorage после авторизации
