@@ -1,7 +1,7 @@
 const mainElement = document.querySelector('main');
 
 import {clearActiveElements, makeFileActive, renderFiles, getUserInfo} from './desktop';
-import {Program} from "./Classes";
+import {DesktopItem, Program} from "./Classes";
 
 //скрытие контекстного меню
 export const deleteContextMenus = () =>
@@ -25,29 +25,20 @@ const prepareFileInfo = (fileType, fileName) =>
 
     console.log('fileType', fileType);
     console.log('fileType', fileName);
-    console.log('userId', getUserInfo(window.location.href).id);
 
     if (fileName.trim() !== '') 
     {
-        formData.append('fileName', fileName);
+        formData.append('name', fileName);
     } else {
         throw new Error('Пустое имя файла!')
     }
 
-    if (typeof fileType === 'number')
-    {
-        if (fileType !== 0) {
-            formData.append('fileType', fileType);
-        } else
-        {
-            throw new Error('Неизвестный тип файла!')
-        }
-    } else {
-        throw new Error('Тип файла передан в неправильном формате!')
-    }
+    formData.append('type', fileType);
 
-    formData.append('id', getUserInfo(window.location.href).id);
-    
+    // TODO добавлять ID пользователя при добавлении файла
+
+    // TODO реализовать гостевую учетную запись
+
     return formData;
 }
 
@@ -57,12 +48,18 @@ const prepareFileInfo = (fileType, fileName) =>
 в поле data получает от неё { FormData }
 */
 const insertFileToDb = async (fileTypeToPrepare, fileNameToPpepare) => {
-    await fetch('/php/newFile.php', {
-        method: 'POST',
-        body: prepareFileInfo(fileTypeToPrepare, fileNameToPpepare)
+    const response = await fetch("/server/files", {
+        method: "POST",
+        body: prepareFileInfo(fileTypeToPrepare, fileNameToPpepare),
     })
-    .then(res => res.json())
-    .then(json => console.log(json))
+    const data = await response.text();
+
+    if (response.status >= 200 && response.status < 300) {
+        console.log(data)
+    }
+    else {
+        console.error(data);
+    }
 
     renderFiles();
 }
@@ -101,8 +98,6 @@ export const makeFileContextMenu = (event) => {
 //открытие контекстного меню
 export const makeDesktopContextMenu = (event) =>
 {
-    // console.log(event.target);
-
     //чтобы на файлы тыкая не появлялась контекстая менюшка раюочего стола
     if (
         event.target.classList.contains('desktop-item') ||
@@ -163,36 +158,39 @@ export const makeDesktopContextMenu = (event) =>
         document.querySelectorAll('div.newFile span.new-desktop-item')
         .forEach(button => {
             button.addEventListener('click', (e) => {
-                let fileType = parseInt(e.target.dataset.dbtype, 10);
+                let fileType = e.currentTarget.dataset.dbtype;
                 let fileName = '', tempFileId = 0;
 
-                switch (e.target.classList[1]) {
+                switch (fileType) {
                     case 'txt':
                         tempFileId = txtCounter();
                         fileName = `Новый текстовый документ ${tempFileId}`;
+
+                        new DesktopItem("").create(fileName, "txt", true);
                         break;
 
                     case 'folder':
                         tempFileId = folderCounter();
                         fileName = `Новая папка ${tempFileId}`;
+                        break;
                     default:
                         break;
                 }
 
-                insertFileToDb(fileType, fileName);
+                // insertFileToDb(fileType, fileName);
             })
         })
     }
 
-    //добавляет подпункт "Создать новый текстовый файл"
+    //добавляет подменю в пункт "Новый" ""
     function createNewFile()
     {
         let newFile = document.createElement('div');
         newFile.classList.add('newFile');
         newFile.insertAdjacentHTML('afterbegin', 
         `
-            <span class="new-desktop-item txt" data-dbtype="1">Текстовый документ</span>
-            <span class="new-desktop-item folder" data-dbtype="2">Папка</span>
+            <span class="new-desktop-item txt" data-dbtype="txt">Текстовый документ</span>
+            <span class="new-desktop-item folder" data-dbtype="folder">Папка</span>
         `);
 
         newFile.style.top = `${event.clientY + 153}px`;
@@ -201,7 +199,6 @@ export const makeDesktopContextMenu = (event) =>
         mainElement.prepend(newFile);
 
         function contextMenu(event){
-
             // console.log('1');
             // console.log(event.target);
             if(!(document.querySelector('.newFile') === null)){

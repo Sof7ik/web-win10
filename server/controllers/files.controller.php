@@ -20,8 +20,14 @@ function route ($method, $urlData, $data, $dbh):void {
 		}
 		else if ($data["id"]) {
 			// получаем файл по ID
-			echo json_encode("получаем файл по ID", 256);
-			$response->setStatus(200)->send();
+			try {
+				$fileId = new MongoDB\BSON\ObjectId($data["id"]);
+				$file = $fileService->getFileByID($fileId);
+				$response->setStatus(200)->send($file);
+			}
+			catch (Exception $e) {
+				$response->setStatus(500)->send("Неверный ID файла: {$data["id"]}, {$e->getMessage()}");
+			}
 		}
 	}
 	
@@ -39,12 +45,16 @@ function route ($method, $urlData, $data, $dbh):void {
 				if (empty($data["content"])) {
 					$data["content"] = "";
 				}
+				$data["created"] = new MongoDB\BSON\UTCDateTime(time() * 1000);
 				
 				try {
 					// добавляем файл в БД
 					$insertRes = $fileService->addFile($data);
+					$insertedId = $insertRes->getInsertedId();
+					
+					$insertedFile = $fileService->getFileByID($insertedId);
 					// отправляем ответ клиенту с указанием ID созданного элемента
-					$response->setStatus(201)->send($insertRes->getInsertedId());
+					$response->setStatus(201)->send($insertedFile);
 				} catch (Exception $e) {
 					$response->setStatus(500)->send($e->getMessage());
 				}

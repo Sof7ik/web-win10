@@ -1,3 +1,5 @@
+import {f} from "caniuse-lite/data/browserVersions";
+
 let fileId;
 let userId = null;
 
@@ -101,29 +103,32 @@ export const clearActiveElements = () => {
 }
 
 const getFilesFromDB = async (userId) => {
-    // return await fetch(`../php/getfiles.php?id=${getUserInfo(window.location.href).id}`);
-    return await fetch(`../php/getfiles.php?id=${userId}`);
+    // TODO получение файлов с привязкой к пользователю
+    return await fetch(`/server/files`);
 }
 
 export const renderFiles = async () => {
-    if (!userId) return;
+    // if (!userId) return;
 
-    await getFilesFromDB()
-    .then(res => res.json())
-    .then(items => {
-        items.forEach(file => {
-            new DesktopItem(file.fileId).create(file.filename, file.type_name);
+    console.log("getting files...");
+
+    const response = await getFilesFromDB();
+
+    const files = await response.json();
+
+    if (response.status >= 200 && response.status < 300) {
+        files.forEach(file => {
+             new DesktopItem(file._id.$oid).create(file.name, file.type);
+            // TODO повесить контекстные меню на файлы
         });
-    })
-    .finally(
-        () => 
-        document.querySelectorAll('div.desktop-item').forEach(item => item.addEventListener('contextmenu', makeFileContextMenu))
-    )
-    .catch(error => console.error(error))
+    }
+    else {
+        console.error(files);
+    }
 }
 
 //проверяем, на что кликнули - ярлык, папка, текстовый документ
-export const checkFileTypeOnDBLClick = (event) => {
+export const checkFileTypeOnDBLClick = async (event) => {
     const target = event.target.parentElement;
     const fileName = target.lastElementChild.textContent;
 
@@ -134,9 +139,16 @@ export const checkFileTypeOnDBLClick = (event) => {
 
     if (target.classList.contains('txt')) {
         fileId = target.dataset.idfile;
-        console.log('fileId', fileId);
-        // console.log('fileId - 3', fileId - 3);
-        new Program('notepad').openTxt(fileName, 'notepad', filesFromDatabase[fileId-3].file_msg);
+
+        const response = await fetch(`/server/files?id=${fileId}`);
+        const file = await response.json();
+        if (response.status >= 200 && response.status < 300) {
+            console.log(file);
+            new Program('notepad').openTxt(file.name, 'notepad', file.content);
+        }
+        else {
+            console.error(file);
+        }
     }
 
     if (target.classList.contains('folder')) {

@@ -13,10 +13,8 @@ setInterval(() =>{
 
 setDate();
 
-document.querySelectorAll('*:not(.desktop-item)').forEach((item) =>
-{
-    item.addEventListener('contextmenu', makeDesktopContextMenu)
-})
+// на правый клик вешаем создание кастомного контекстного меню
+document.querySelector("main").addEventListener("contextmenu", makeDesktopContextMenu);
 
 renderFiles();
 

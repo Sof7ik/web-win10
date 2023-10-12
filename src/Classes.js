@@ -24,17 +24,25 @@ export class DesktopItem
         this.el.dataset.idfile = id;
     }
    
-    create(text, what) {
+    create(filename, what, isEditing = false) {
         this.img = document.createElement('img');
         this.img.setAttribute('alt', 'image');
         this.img.classList.add('file-image');
 
-        this.txt = document.createElement('span');
-        this.txt.classList.add('file-name');
-        this.txt.innerText = text;
+        if (isEditing) {
+            this.inputFileName = document.createElement("textarea");
+            this.inputFileName.value = filename;
+            this.inputFileName.classList.add('file-name', "editing");
+            this.el.insertAdjacentElement('beforeend', this.inputFileName);
+        }
+        else {
+            this.txt = document.createElement('span');
+            this.txt.classList.add("file-name");
+            this.txt.innerText = filename;
+            this.el.insertAdjacentElement('beforeend', this.txt);
+        }
 
-        this.el.insertAdjacentElement('beforeend', this.img);
-        this.el.insertAdjacentElement('beforeend', this.txt);
+        this.el.insertAdjacentElement('afterbegin', this.img);
 
         switch (what) {
             case "folder":

@@ -86,3 +86,11 @@ main
     text-align: center;
     color: #fff;
 }
+.file-name.editing {
+    width: 100%;
+    display: block;
+    resize: vertical;
+    color: #000;
+
+    cursor: text;
+}

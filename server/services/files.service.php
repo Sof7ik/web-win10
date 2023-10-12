@@ -1,6 +1,7 @@
 <?php
 
 /** @var $mongoDbHandler MongoDB\Client  */
+
 class FilesService {
 	private MongoDB\Collection $db_collection;
 	public function __construct($mongoDbHandler)
@@ -19,5 +20,9 @@ class FilesService {
 	
 	public function getAllFiles():array {
 		return $this->getDbCollection()->find()->toArray();
+	}
+	
+	public function getFileByID(MongoDB\BSON\ObjectId $fileId):object {
+		return $this->getDbCollection()->findOne(["_id" => $fileId]);
 	}
 }
