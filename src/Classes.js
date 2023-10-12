@@ -8,12 +8,19 @@ import {
 import { swapExplorerArrows } from './explorer';
 import { URLHandler } from './browser';
 
-import closeIcon from "../assets/icons/programm-icons/close.svg";
-import minifyIcon from "../assets/icons/programm-icons/minify.svg";
-import fullWindow from "../assets/icons/programm-icons/full-widnow.svg";
-import folderIcon from "../assets/icons/desktop-icons/folder.png";
-import txtIcon from "../assets/icons/desktop-icons/txt.png";
-import settingsIcon from "../assets/icons/desktop-icons/settings.png";
+
+import folderIcon from "/assets/icons/desktop-icons/folder.png";
+import txtIcon from "/assets/icons/desktop-icons/notepad.png";
+import settingsIcon from "/assets/icons/desktop-icons/settings.png";
+
+// favicon-ы для программ
+import notepadFavicon from "/assets/icons/programm-icons/notepad.png";
+import folderFavicon from "/assets/icons/programm-icons/explorer.png";
+
+// иконки закрытия, сворачивания, разворачивания
+import closeIcon from "/assets/icons/programm-icons/close.svg";
+import minifyIcon from "/assets/icons/programm-icons/minify.svg";
+import fullWindow from "/assets/icons/programm-icons/full-widnow.svg";
 
 export class DesktopItem
 {
@@ -159,7 +166,7 @@ export class Program
         this.element.insertAdjacentHTML('afterbegin', `
             <div class="title">
                 <div class="left-programm-title">
-                    <img class="programm-icon" src="./icons/programm-icons/notepad.png" alt="icon">
+                    <img class="programm-icon" src="${notepadFavicon}" alt="icon">
                     <span class="programm-title">${fileName} — Notepad</span>
                 </div>
 
@@ -212,7 +219,7 @@ export class Program
         this.element.insertAdjacentHTML('afterbegin', `
             <div class="title">
                 <div class="left-programm-title left-explorer-title">
-                    <img class="explorer-icon" src="./icons/programm-icons/explorer.png" alt="logo">
+                    <img class="explorer-icon" src="${folderFavicon}" alt="logo">
                     <span class="programm-title">${fileName}</span>
                 </div>
                     
@@ -258,22 +265,22 @@ export class Program
                 </aside>
                 <section class="explorer-content-wrapper">
                     <div class="desktop-item bin">
-                        <img class="bin" src="./icons/desktop-icons/bin.png" alt="Bin">
+                        <img class="bin" src="/assets/icons/desktop-icons/bin.png" alt="Bin">
                         <span class="file-name">Корзина</span>
                     </div>
 
                     <div class="desktop-item folder">
-                        <img class="folder" src="./icons/desktop-icons/folder.png" alt="Folder">
+                        <img class="folder" src="/assets/icons/desktop-icons/folder.png" alt="Folder">
                         <span class="file-name">Новая папка</span>
                     </div>
 
                     <div class="desktop-item txt">
-                        <img class="txt" src="./icons/desktop-icons/txt.png" alt="Txt-file">
+                        <img class="txt" src="/assets/icons/desktop-icons/notepad.png" alt="Txt-file">
                         <span class="file-name">aboutMe.txt</span>
                     </div>
 
                     <div class="desktop-item shortcut">
-                        <img class="shortcut" src="./icons/desktop-icons/txt.png" alt="shortcut">
+                        <img class="shortcut" src="/assets/icons/desktop-icons/notepad.png" alt="shortcut">
                         <span class="file-name">Имя ярлыка</span>
                     </div>
                 </section>
@@ -439,11 +446,6 @@ export class Program
             event.preventDefault();
             console.log('Searching...');
         })
-
-        // создание элемента для панели задач
-        this.taskPanelShortcut = new TaskPanelElement(settingsIcon, this);
-        // добавляем элемент на панель задач
-        this.taskPanelShortcut.addToPanel();
     }
 
     //закрытие программы
@@ -507,6 +509,11 @@ export class Program
         this.element.querySelector(".close").addEventListener('click', this.closeProgram);
         this.element.querySelector('.full-window').addEventListener('click', this.fullWindow);
         this.element.querySelector('.semi-close').addEventListener('click', this.minifyWindow);
+
+        // создание элемента для панели задач
+        this.taskPanelShortcut = new TaskPanelElement(`/assets/icons/desktop-icons/${what}.png`, this);
+        // добавляем элемент на панель задач
+        this.taskPanelShortcut.addToPanel();
     }
 }
 

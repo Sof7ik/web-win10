@@ -1,4 +1,4 @@
-div.notepad
+.notepad.application
 {
     width: 60%;
     height: 50%;
@@ -24,64 +24,57 @@ div.notepad
     color: #000;
 }
 
-nav.notepad-nav a.notepad-navigation-item
+.notepad-nav .notepad-navigation-item
 {
-    padding: 0px 7px;
+    padding: 0 7px;
     position: relative;
 }
 
-nav.notepad-nav a.notepad-navigation-item:hover
+.notepad-nav .notepad-navigation-item:hover
 {
     background-color: rgba(147, 216, 255, 0.76);
 }
 
-a.notepad-navigation-item.file:hover ul.lists-wrapper
-{
-    display: flex;
-}
-
-ul.lists-wrapper:hover
-{
-    display: flex;
-}
-
-ul.lists-wrapper
+.lists-wrapper
 {
     position: absolute;
     left: 0;
     top: 18px;
-    
+
     z-index: 1000;
     min-width: 263px;
 
-    display: flex;
+    display: none;
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
 
-
-    color: #000000;
+    color: #000;
     background-color: #f2f2f2;
     outline: 1px solid #cccccc;
-
-    display: none;
 
     /* padding: 5px 0px 5px 15px; */
 }
 
-ul.lists-wrapper > li
+.notepad-navigation-item.file:hover .lists-wrapper,
+.lists-wrapper:hover
+{
+    display: flex;
+}
+
+.lists-wrapper > li
 {
     width: 100%;
-    padding: 5px 0px;
+    padding: 5px 0;
     border-bottom: 2px solid #cccccc;
 }
 
-ul.lists-wrapper > li:last-child
+.lists-wrapper > li:last-child
 {
     border-bottom: none;
 }
 
-ul.lists-wrapper > li > ul > li > span
+.lists-wrapper > li > ul > li > span
 {
     width: 100%;
     display: inline-block;
@@ -90,30 +83,34 @@ ul.lists-wrapper > li > ul > li > span
     color: #6d6d6d;
 }
 
-ul.lists-wrapper > li > ul > li > span:hover
+.lists-wrapper > li > ul > li > span:hover
 {
     background-color: rgba(147, 216, 255, 0.76);
 }
 
-ul.lists-wrapper > li > ul > li > span.active_nav_item
+.lists-wrapper > li > ul > li > span.active_nav_item
 {
     color: #000;
 }
 
-.programm-change-size 
-{
-    transition: all .2s; 
-    color: #fff;
+/*.notepad.application .programm-change-size*/
+/*{*/
+/*    transition: all .2s; */
+/*    color: #fff;*/
+/*}*/
+
+/*.programm-change-size:hover*/
+/*{*/
+/*    background-color: rgba(143, 143, 143, 0.4);*/
+/*   */
+/*    transition: all .2s;*/
+/*}*/
+
+.notepad.application .right-programm-title img {
+    filter: invert(1);
 }
 
-.programm-change-size:hover
-{
-    background-color: rgba(143, 143, 143, 0.4);
-   
-    transition: all .2s;
-}
-
-.right-programm-title .programm-change-size:last-child
+.notepad.application .right-programm-title .programm-change-size:last-child
 {
     margin-right: 0;
 }

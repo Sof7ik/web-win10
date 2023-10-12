@@ -150,10 +150,10 @@ span.new-desktop-item:hover
 
 span.new-desktop-item.txt::before
 {
-    background-image: url('../../assets/icons/desktop-icons/txt.png');
+    background-image: url('/assets/icons/desktop-icons/notepad.png');
 }
 
 span.new-desktop-item.folder::before
 {
-    background-image: url('../../assets/icons/desktop-icons/folder.png');
+    background-image: url('/assets/icons/desktop-icons/folder.png');
 }
