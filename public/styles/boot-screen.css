@@ -10,7 +10,7 @@ div.container
 
     box-shadow: inset 0px 0px 2000px 100px #000;
 
-    background-image: url('../../assets/desktop-bg/ken_roczen_suzuki_2015.jpg');
+    background-image: url('/assets/desktop-bg/desktop-bg-3.jpg');
 
     background-repeat: no-repeat;
     background-position: center center;
@@ -129,19 +129,20 @@ div.person-wrapper span
     font-size: 35px;
 }
 
-form.login-inputs
-{
+.password-button-wrapper {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
     align-items: center;
-
     outline: 2px solid #6587b6;
+}
+.password-button-wrapper.hidden {
+    display: none;
 }
 
 input
 {
-    padding: 5px 0px;
+    padding: 5px 0;
     outline: none;
     border: none;
 }
@@ -156,9 +157,9 @@ input[type="password"]:focus{
     cursor: text;
 }
 
-input[type="submit"]#login-btn
+#login-btn
 {
-    background-image: url('../../assets/icons/programm-icons/to-arrow white.png');
+    background-image: url("/assets/icons/programm-icons/to-arrow__white.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
@@ -173,4 +174,12 @@ p.error-message
 {
     color: #fff;
     margin-top: 30px;
+}
+
+.guest-login {
+    display: block;
+}
+
+.guest-login.hidden {
+    display: none;
 }

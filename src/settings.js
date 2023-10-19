@@ -1,4 +1,7 @@
 import {getUserInfo, getUserConfig} from './desktop';
+import desktopBg1 from "/assets/desktop-bg/desktop-bg-1.jpg";
+import desktopBg2 from "/assets/desktop-bg/desktop-bg-2.jpg";
+import desktopBg3 from "/assets/desktop-bg/desktop-bg-3.jpg";
 
 let colors = [
     '#ff8c00', 
@@ -27,71 +30,114 @@ let colors = [
 ];
 
 let photos = [
-    '../desktop-bg/DSC01142.JPG',
-    '../desktop-bg/ken_roczen_suzuki_2015.jpg',
-    '../desktop-bg/pepega.jpg',
-]
+    desktopBg1, desktopBg2, desktopBg3,
+];
 
-class DesktopPhoto
-{
-    constructor(index) {
-        this.elem = document.createElement('div');
-        this.elem.dataset.number = index;
-    }
+// class DesktopPhoto
+// {
+//     constructor(index) {
+//         this.elem = document.createElement('div');
+//         this.elem.dataset.number = index;
+//     }
+//
+//     createPhoto(imageUrl) {
+//         this.elem.classList.add('desktop-photo');
+//         this.elem.backgroundImage = `url(${imageUrl})`
+//     }
+//
+//     createColor(color)
+//     {
+//         this.elem.classList.add('desktop-photo');
+//         this.elem.backgroundColor = color
+//     }
+//
+//     render() {
+//         const renderTo_Elem = document.querySelector('.choosen');
+//     }
+// }
 
-    createPhoto(imageUrl) {
-        this.elem.classList.add('desktop-photo');
-        this.elem.backgroundImage = `url(${imageUrl})`
-    }
+// сохранение фона рабочего стола для пользователя
+async function saveBgToDb (bgToSave) {
+    let config = new FormData();
 
-    createColor(color)
+    //если не цвет, узнаем имя картинки
+    if (bgToSave.split('/')[2] !== undefined)
     {
-        this.elem.classList.add('desktop-photo');
-        this.elem.backgroundColor = color
+        bgToSave = bgToSave.split('/')[2].slice(0, bgToSave.split('/')[2].indexOf('"'));
     }
 
-    render() {
-        const renderTo_Elem = document.querySelector('.choosen');
-    }
+    config.append('bg', bgToSave);
+    config.append('idUser', getUserInfo(window.location.href).id);
+
+    await fetch(`./../php/saveConfig.php`, {
+        method: 'POST',
+        body: config
+    })
+        .then(res => res.json())
+        .then(text => {
+            console.log(text);
+            getUserConfig(getUserInfo(window.location.href).id);
+        })
+}
+
+// вывод блока для выбора фотографии в качестве фона рабочего стола
+export function renderPhotoChooseBlock() {
+    let html = `
+        <div class="choose-photo__wrapper" id="choose-photo">
+            <p class="choose-photo__title">Выберите фото</p>
+            
+            <div class="desktop-photos">`;
+
+photos.forEach((photoSrc, index) => {
+    html += `
+        <div class="desktop-photo" data-number="${index}">
+            <img src="${photoSrc}" alt="desktop-bg-${index}" class="desktop-photo__image">
+        </div>`;
+})
+
+    html += `</div>
+            
+            <form enctype="multipart/form-data" action="" method="POST" class="settings__choose-photo-form">
+                <input type="hidden" name="MAX_FILE_SIZE" value="30000" />  
+                <input type="file" id="select-desktop-image" name="bgImage">
+                <label class="select-desktop-image-label" for="select-desktop-image">Обзор</label>
+            </form>
+        </div>
+
+        <h3 class="choose-pos">Choose position</h3>
+        <select id="select-contain-type">
+            <option data-position="contain">Contain</option>
+            <option data-position="Cover">Cover</option>
+            <option data-position="100%">100%</option>
+            <option  data-position="background-repeat">background-repeat</option>
+        </select>
+    `;
+
+    return html;
 }
 
 export const ChangeDesktopBgType = () =>
 {
-    const selectBgDesktop = document.getElementById('select-bg-type'); //сам селект
-    selectBgDesktop.addEventListener('change', (event) =>       //при изменении
+    const settingsApplicationContainer = document.querySelector(".application.settings");
+
+    //сам селект
+    const selectBgDesktop = settingsApplicationContainer.querySelector('#select-bg-type');
+
+    //при изменении
+    selectBgDesktop.addEventListener('change', (event) =>
     {
-        let value = event.target.options.selectedIndex;             //чекаем, какой <option> выбран
-        let choosen = document.querySelector('.choosen');           // блок с заголовком и цветами/фотографиями
+        // проверяем, какой <option> выбран
+        let value = event.target.options.selectedIndex;
+
+        // блок с заголовком и цветами/фотографиями
+        let dynamicArea = document.querySelector('.application.settings .background-dynamic-area');
         
         switch (value) {
-            case 1: //value = 0 - фотки
-                choosen.innerHTML = 
-                `<h3 id="choose-photo">Choose a photo</h3>
-                <div class="desktop-photos"></div>
-                <form enctype="multipart/form-data" action="./php/files.php" method="POST">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                    <input type="file" id="select-desktop-image" name="bgImage">
-                    <label class="select-desktop-image-label" for="select-desktop-image">Обзор</label>
-
-                    <input type="submit">
-                </form>
-                `
-                document.querySelector('h3.choose-pos').style.display = 'block';
-                document.getElementById('select-contain-type').style.display = 'block';
-
-                photos.forEach(() => {
-                    document.querySelector('.desktop-photos').insertAdjacentHTML('beforeend',
-                    `<div class="desktop-photo"></div>`
-                )})
-
-                document.querySelectorAll('div.desktop-photo').forEach((element, index) => {
-                    console.log(index);
-                    element.style.backgroundImage = `url(${photos[index]})`;
-                    element.dataset.number = index;
-                });
+            case 0: //value = 0 - фотки
+                dynamicArea.innerHTML = renderPhotoChooseBlock();
                 break;
             
-            case 2: //value = 1 - сплошной цвет                                             
+            case 1: //value = 1 - сплошной цвет
                 choosen.innerHTML = 
                 `
                 <h3 id="choose-color">Choose a color</h3>
@@ -112,7 +158,7 @@ export const ChangeDesktopBgType = () =>
                 document.getElementById('select-contain-type').style.display = 'none'; //скрваем нижний блок
                 break;
 
-            case 3:
+            case 2:
                 console.log('value =', 2);
                 break;
 
@@ -126,44 +172,19 @@ export const ChangeDesktopBgType = () =>
 const changeBg = () =>
 {
     let newBg;
-    if(document.getElementById('choose-photo'))
-    {
-        newBg = document.querySelector('div.desktop-photo-active').style.backgroundImage;
+    if(document.getElementById('choose-photo')) {
+        newBg = document.querySelector('.desktop-photo-active img').src;
         // document.querySelector('main').style.backgroundColor = '';
         // document.querySelector('main').style.backgroundImage = newBg;
     }
 
-    if(document.getElementById('choose-color'))
-    {
+    if(document.getElementById('choose-color')) {
         newBg = document.querySelector('div.desktop-color-active').style.backgroundColor;
         // document.querySelector('main').style.backgroundImage = 'none';
         // document.querySelector('main').style.backgroundColor = newBg;
     }
 
-    async function saveBgToDb (bgToSave) {
-        let config = new FormData();
-
-        //если не цвет, узнаем имя картинки
-        if (bgToSave.split('/')[2] !== undefined)
-        {
-            bgToSave = bgToSave.split('/')[2].slice(0, bgToSave.split('/')[2].indexOf('"'));
-        }
-        
-        config.append('bg', bgToSave);
-        config.append('idUser', getUserInfo(window.location.href).id);
-        
-        await fetch(`./../php/saveConfig.php`, {
-            method: 'POST',
-            body: config
-        })
-        .then(res => res.json())
-        .then(text => {
-            console.log(text);
-            getUserConfig(getUserInfo(window.location.href).id);
-        })
-    }
-
-    saveBgToDb(newBg);
+    // saveBgToDb(newBg);
 }
 
 const clearCurrentColor = (elem) =>
@@ -193,12 +214,12 @@ const clearCurrentColor = (elem) =>
 
 export const SelectNewColor = () =>
 {
-    document.querySelector('.choosen').addEventListener('click', (event) => {
-
-        if(document.getElementById('choose-photo'))
-        {
+    document.querySelector('.application.settings .background-dynamic-area')
+        .addEventListener('click', event => {
+        if(document.getElementById('choose-photo')) {
             console.log('Выбор фото');
-            if (event.target.dataset.number)
+
+            if (event.target.dataset.number || event.target.closest(".desktop-photo").dataset.number)
             {
                 console.log(event.target.dataset.number);
                 event.target.classList.add('desktop-photo-active');

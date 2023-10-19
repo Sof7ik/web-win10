@@ -40,8 +40,14 @@ export function getUserInfo (url) {
 
 export async function getUserConfig(id)
 {
-    try {
-        const response = await fetch(`./../php/getConfig.php?id=${id}`);
+    let config = {};
+
+    if (id === -1) {
+        config = JSON.parse(localStorage.getItem("userConfig"));
+    }
+    else {
+        // const response = await fetch(`./../php/getConfig.php?id=${id}`);
+        const response = await fetch(`/server/users?id=${id}`);
         const data = await response.json();
 
         if (response.status < 200 && response.status >= 300) {
@@ -50,29 +56,22 @@ export async function getUserConfig(id)
             return;
         }
 
-        if (data !== null)
-        {
-            //фото или цвет ?
-            //разбиваем строку по '.' (отделяем расширение файла от названия)
-            let image = data.bg.split('.');
+        if (data !== null)  config = data;
+    }
 
-            //если это картинка, то элементов в массиве будет 2
-            //если цвет, то один
-            if (image.length > 1)
-            {
-                document.querySelector('main').style.backgroundImage = `url('./desktop-bg/${data.bg}')`;
-            } else
-            {
-                document.querySelector('main').style.backgroundImage = '';
-                document.querySelector('main').style.backgroundColor = data.bg;
-            }
-        }
-        else
-        {
-            console.warn('bg is null')
-        }
-    } catch(e) {
-        console.error(e);
+    const mainElem = document.querySelector('main');
+    // ставим фон рабочего стола
+    if (config.desktopBg.type === "color") {
+        mainElem.style.backgroundImage = "";
+        mainElem.style.backgroundColor = config.desktopBg.value;
+    }
+    else if (data.desktopBg.type === "image") {
+        mainElem.style.backgroundImage = `url("${config.desktopBg.value}")`;
+        mainElem.style.backgroundColor = "";
+        mainElem.style.backgroundSize = config.desktopBg.fill || "cover";
+    }
+    else {
+        mainElem.style.backgroundColor = "red";
     }
 }
 
@@ -99,28 +98,21 @@ export const clearActiveElements = () => {
     deleteContextMenus();
 }
 
-const getFilesFromDB = async (userId) => {
-    // TODO получение файлов с привязкой к пользователю
-    return await fetch(`/server/files`);
-}
+export const renderFiles = async (userId) => {
+    if (userId) {
+        const response = await fetch(`/server/files?userId=${userId}`);
 
-export const renderFiles = async () => {
-    // if (!userId) return;
+        const files = await response.json();
 
-    console.log("getting files...");
-
-    const response = await getFilesFromDB();
-
-    const files = await response.json();
-
-    if (response.status >= 200 && response.status < 300) {
-        files.forEach(file => {
-             new DesktopItem(file._id.$oid).create(file.name, file.type);
-            // TODO повесить контекстные меню на файлы
-        });
-    }
-    else {
-        console.error(files);
+        if (response.status >= 200 && response.status < 300) {
+            files.forEach(file => {
+                new DesktopItem(file._id.$oid).create(file.name, file.type);
+                // TODO повесить контекстные меню на файлы
+            });
+        }
+        else {
+            console.error(files);
+        }
     }
 }
 

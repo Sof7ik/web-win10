@@ -11,11 +11,12 @@
     <meta name='resource-type' content='Document'/>
     <meta name='robots' content='noindex,nofollow'/>
     <meta http-equiv='content-language' content='ru'/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <title>Вход</title>
 
-    <link rel='stylesheet' href='./styles/boot-screen.css'>
-    <link rel='stylesheet' href='./styles/style.css'>
+    <link rel='stylesheet' href='/public/styles/boot-screen.css'>
+    <link rel='stylesheet' href='/public/styles/style.css'>
 
     <script src='' defer></script>
 </head>
@@ -23,37 +24,48 @@
     <div class="container">
         
         <aside class="left-user-list">
-            <input type="search" name="" list="datalist1" style="width: 100%">
-            <datalist id="datalist1">
-                <option>Привет 1</option>
-                <option>Привет 2</option>
-                <option>Привет 3</option>
-                <option>Привет 4</option>
-                <option>Привет 5</option>
-            </datalist>
-
             <ul class="user-list">
-
+                <li data-type="guest">
+                    <div class="user-list-person-wrapper">
+                        <div class="person-image">
+                            <img class="person-image"
+                                 src="/assets/icons/bootScreen/person.png"
+                                 alt="person-avatar">
+                        </div>
+                        <span>Гость</span>
+                    </div>
+                </li>
             </ul>
         </aside>
 
         <div class="bootScreen">
             <div class="person-wrapper">
                 <div class="person-image">
-                    <img class="person-image" src="../assets/icons/bootScreen/person.png" alt="person-avatar">
+                    <img class="person-image"
+                         src="/assets/icons/bootScreen/person.png"
+                         alt="person-avatar">
                 </div>
                 <span id="username">Лёнька</span>
             </div>
             
             <form action="" method="POST" class="login-inputs">
-                <input type="password" name="user-password" id="user-password" autofocus required placeholder="Password">
-                <input type="submit" value="" id='login-btn'>
+                <div class="password-button-wrapper">
+                    <input type="password"
+                           name="user-password"
+                           id="user-password"
+                           autofocus
+                           required
+                           placeholder="">
+                    <input type="submit" id='login-btn' value="">
+                </div>
+
+                <button type="submit" class="guest-login hidden" id="login-guest">Войти</button>
             </form>
 
             <p class="error-message" id="error-message"></p>
         </div>
     </div>
 
-    <script src="./js/login.js" defer></script>
+    <script src="/src/login.js" defer></script>
 </body>
 </html>

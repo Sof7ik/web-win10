@@ -2,7 +2,8 @@ import { clearActiveElements } from './desktop';
 
 import {
     ChangeDesktopBgType,
-    SelectNewColor
+    SelectNewColor,
+    renderPhotoChooseBlock
 } from './settings';
 
 import { swapExplorerArrows } from './explorer';
@@ -401,43 +402,28 @@ export class Program
                 </ul> 
             </aside>
     
-            <aside class="right">
+            <section class="right">
                 <div class="right-programm-title right-settings-title"> 
                     ${this.renderButtonsPanel()}
                 </div>
     
-                <h1 class="right-aside-title">Desktop background</h1>
+                <h1 class="right-aside-title">Фон</h1>
     
                 <img class="desktop-bg-example" 
-                    src="/assets/desktop-bg/IMG_7484.JPG" 
+                    src="/assets/desktop-bg/desktop-bg-1.jpg" 
                     alt="">
     
-                <h3>Background</h3>
+                <h3>Фон</h3>
                 <select id="select-bg-type">
-                    <option></option>
-                    <option>Photo</option>
-                    <option>Color</option>
-                    <option>Slides</option>
+                    <option selected>Фото</option>
+                    <option>Сплошной цвет</option>
+                    <option>Слайд-шоу</option>
                 </select>
     
-                <div class="choosen">
-                    <form enctype="multipart/form-data" action="./php/files.php" method="POST">
-                        <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                        <input type="file" id="select-desktop-image" name="bgImage">
-                        <label class="select-desktop-image-label" for="select-desktop-image">Обзор</label>
-    
-                        <input type="submit">
-                    </form>
+                <div class="background-dynamic-area">
+                    ${renderPhotoChooseBlock()}
                 </div>
-    
-                <h3 class="choose-pos">Choose position</h3>
-                <select id="select-contain-type">
-                    <option data-position="contain">Contain</option>
-                    <option data-position="Cover">Cover</option>
-                    <option data-position="100%">100%</option>
-                    <option  data-position="background-repeat">background-repeat</option>
-                </select>
-            </aside>
+            </section>
         `);
         this.giveAllFuncs(what);
         ChangeDesktopBgType();
