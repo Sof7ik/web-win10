@@ -35,3 +35,22 @@ export const setDate = () => {
     document.querySelector('span.time').textContent = hours + ':' + minutes + ':' + seconds;
     document.querySelector('span.date').textContent = day + '.' + month + '.' + date.getFullYear();
 }
+
+function openWinMenu(event) {
+    const winMenu = document.querySelector(".start-menu");
+    winMenu.classList.toggle("opened");
+}
+
+function logOut(event) {
+    localStorage.removeItem("userConfig");
+    window.location.href = "/public/boot.html";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    // вешаем клик на Win
+    document.querySelector(".task-panel-program__button[data-menu='start']")
+        .addEventListener("click", openWinMenu);
+
+    // вешаем клик на выйти
+    document.getElementById("logout-btn").addEventListener("click", logOut);
+})

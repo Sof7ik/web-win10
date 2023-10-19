@@ -506,19 +506,25 @@ export class Program
 export class TaskPanelElement {
     constructor(pathToIcon, linkedApp) {
         this.taskProgram = document.createElement("div");
-        this.taskProgram.classList.add("task-panel-programm", "opened", "active");
+        this.taskProgram.classList.add("task-panel-program");
+
+        this.taskProgramBtn = document.createElement("button");
+        this.taskProgramBtn.classList.add("task-panel-program__button", "opened", "active");
 
         // create icon
         const icon = document.createElement("img");
-        icon.classList.add("programm-icon");
+        icon.classList.add("program-icon");
         icon.src = pathToIcon;
 
-        this.taskProgram.appendChild(icon);
+        this.taskProgramBtn.appendChild(icon);
 
         // привязываем экземпляр приложения к ярылку на панели задач
         this.linkedApp = linkedApp;
 
-        this.taskProgram.addEventListener("click", e => this.maximizeApp());
+        // в <div> кладём <button>
+        this.taskProgram.appendChild(this.taskProgramBtn);
+
+        this.taskProgramBtn.addEventListener("click", e => this.maximizeApp());
     }
 
     addToPanel() {
@@ -530,7 +536,7 @@ export class TaskPanelElement {
     }
 
     toggleState() {
-        this.taskProgram.classList.toggle("active");
+        this.taskProgramBtn.classList.toggle("active");
     }
 
     maximizeApp(clickEvent) {
