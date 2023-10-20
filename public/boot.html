@@ -17,8 +17,6 @@
 
     <link rel='stylesheet' href='/public/styles/boot-screen.css'>
     <link rel='stylesheet' href='/public/styles/style.css'>
-
-    <script src='' defer></script>
 </head>
 <body>
     <div class="container">
@@ -45,7 +43,7 @@
                          src="/assets/icons/bootScreen/person.png"
                          alt="person-avatar">
                 </div>
-                <span id="username">Лёнька</span>
+                <input type="text" id="username" name="user-login" value="">
             </div>
             
             <form action="" method="POST" class="login-inputs">
@@ -59,7 +57,7 @@
                     <input type="submit" id='login-btn' value="">
                 </div>
 
-                <button type="submit" class="guest-login hidden" id="login-guest">Войти</button>
+                <button type="submit" class="win-button hidden" id="login-guest">Войти</button>
             </form>
 
             <p class="error-message" id="error-message"></p>

@@ -1,31 +1,42 @@
 const errorMessageElem = document.getElementById('error-message');
 
-function login(event) 
+async function login(event)
 {
     event.preventDefault();
-    let username = document.getElementById('username').textContent;
-    let password = document.getElementById('user-password').value.trim();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('user-password').value.trim();
 
-    let formData = new FormData();
+    console.log("Авторизация");
 
-    formData.append('username', username);
+    if (!username.length) {
+        console.error("Логин");
+        return;
+    }
+
+    const formData = new FormData();
+
+    formData.append('login', username);
     formData.append('password', password);
 
-    fetch('./../php/loginInWin.php', {
+    const response = await fetch('/server/users/login', {
         method: 'POST',
         body: formData
-    })
-    .then(res => res.json())
-    .then(unjsoned => {
-        if (unjsoned !== null)
-        {
-            window.location.href = `./../index.html?id=${unjsoned.userId}`;
-        }
-        else
-        {
-            errorMessageElem.textContent = 'Введен неправильный пароль';
-        }
-    })
+    });
+
+    const data = await response.json();
+
+    if (response.status < 200 && response.status >= 300) {
+        console.error(data);
+        return;
+    }
+
+    if (data)
+    {
+        data.id = data._id.$oid;
+
+        localStorage.setItem("userConfig", JSON.stringify(data))
+        window.location.href = `./../index.html`;
+    }
 }
 
 function loginGuest() {

@@ -53,6 +53,21 @@ div.left-programm-title, div.right-programm-title
     padding: 0 0 0 10px;
 }
 
+.win-button {
+    display: block;
+    max-width: max-content;
+    background-color: #111111;
+
+    padding: 7px 30px;
+    transition: all .1s;
+    border: 2px solid #858585;
+}
+@media screen and (hover: hover) {
+    .win-button:hover {
+        filter: brightness(105%);
+    }
+}
+
 /* progs */
 
 div.title

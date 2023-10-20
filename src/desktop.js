@@ -40,26 +40,12 @@ export function getUserInfo (url) {
 
 export async function getUserConfig(id)
 {
-    let config = {};
+    const config = JSON.parse(localStorage.getItem("userConfig"));
 
-    if (id === -1) {
-        config = JSON.parse(localStorage.getItem("userConfig"));
-    }
-    else {
-        // const response = await fetch(`./../php/getConfig.php?id=${id}`);
-        const response = await fetch(`/server/users?id=${id}`);
-        const data = await response.json();
-
-        if (response.status < 200 && response.status >= 300) {
-            // TODO error
-
-            return;
-        }
-
-        if (data !== null)  config = data;
-    }
+    if (!config) return;
 
     const mainElem = document.querySelector('main');
+
     // ставим фон рабочего стола
     if (config.desktopBg.type === "color") {
         mainElem.style.backgroundImage = "";

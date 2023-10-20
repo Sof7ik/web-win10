@@ -6,6 +6,7 @@ import { makeDesktopContextMenu, makeFileContextMenu } from './context-menu';
 
 // проверяем авторизацию
 const userConfig = JSON.parse(localStorage.getItem("userConfig"));
+
 if (!userConfig || !userConfig.id) {
     window.location.href = "/public/boot.html";
 }
