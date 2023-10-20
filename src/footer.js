@@ -2,11 +2,11 @@ import winLogoBlue from "/assets/icons/left-panel/win/win-blue.png";
 import winLogoWhite from "/assets/icons/left-panel/win/win-white.png";
 
 //подмена картинок "Пуск"
-export const swapWinLogo = () => {
-    document.querySelector('div.task-panel-programm').addEventListener('mouseover', (event) => {
+function swapWinLogo () {
+    document.querySelector('.task-panel-program__button[data-menu="start"]').addEventListener('mouseover', (event) => {
         document.querySelector('img.win').src = winLogoBlue;
     })
-    document.querySelector('div.task-panel-programm').addEventListener('mouseout', (event) => {
+    document.querySelector('.task-panel-program__button[data-menu="start"]').addEventListener('mouseout', (event) => {
         document.querySelector('img.win').src = winLogoWhite;
     })
 }
@@ -53,4 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // вешаем клик на выйти
     document.getElementById("logout-btn").addEventListener("click", logOut);
+
+    swapWinLogo();
 })

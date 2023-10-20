@@ -28,5 +28,3 @@ renderFiles();
 
 mainElement.addEventListener('click', makeFileActive);
 mainElement.addEventListener('dblclick', checkFileTypeOnDBLClick);
-
-swapWinLogo();
